@@ -116,8 +116,8 @@ int main(int argc, char **argv)
     start[5] = temp_joint_value[5];
     //And a random goal state:
     ob::ScopedState<> goal(space);
-    goal[0] =  0;
-    goal[1] = 0;
+    goal[0] = 0.0;
+    goal[1] = -0.5;
     goal[2] = 0;
     goal[3] = 0;
     goal[4] = 0;
@@ -145,7 +145,7 @@ int main(int argc, char **argv)
     
     thread t1{&GvlOmplPlannerHelper::rosIter ,my_class_ptr};
 
-    for(size_t n = 0; n < 8; ++n)
+    for(size_t n = 0; n < 5; ++n)
     {
         my_class_ptr->moveObstacle();
 

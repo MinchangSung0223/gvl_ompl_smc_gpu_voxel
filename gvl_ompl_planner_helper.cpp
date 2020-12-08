@@ -21,6 +21,7 @@
  */
 //----------------------------------------------------------------------/*
 #include "gvl_ompl_planner_helper.h"
+
 #include <signal.h>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
@@ -282,7 +283,8 @@ void GvlOmplPlannerHelper::rosIter(){
            gvl->visualizeMap("countingVoxelList");
            num_colls = gvl->getMap("countingVoxelList")->as<gpu_voxels::voxellist::CountingVoxelList>()->collideWith(gvl->getMap("mySolutionMap")->as<gpu_voxels::voxellist::BitVectorVoxelList>(), 1.0f);
            num_colls2 = gvl->getMap("countingVoxelList")->as<gpu_voxels::voxellist::CountingVoxelList>()->collideWith(gvl->getMap("myRobotMap")->as<gpu_voxels::voxellist::BitVectorVoxelList>(), 1.0f); 
-           std::cout << "Detected " << num_colls-num_colls2 << " collisions " << std::endl;
+           if(num_colls-num_colls2>=180)
+                 std::cout << "!!!!!!!!!!!!!!!Detected Collision!!!!!!!!! " << num_colls-num_colls2 << " collisions " << std::endl;
            
       }
       r.sleep();
